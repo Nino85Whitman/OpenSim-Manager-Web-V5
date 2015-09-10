@@ -1,0 +1,22 @@
+Install OSMW v5.5
+=================
+- http://domain.com/osmw/install.php
+
+More config
+===========
+- inc/config.php
+
+Admin Login
+===========
+firstname = super
+lastname  = admin
+password  = password
+
+For Linux
+===========
+Writing permission for folder /inc for Installation
+Writing authorization install.php
+
+Writing permission for folder /opensimulator for use
+
+Enjoy!
