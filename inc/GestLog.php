@@ -50,27 +50,10 @@ if (isset($_SESSION['authentification']))
 
     // Test du fichier log 32bit / 64bit
     $versionlog = "";
-    $fichierLog32 = INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.32BitLaunch.log';
-    
-    if (file_exists($fichierLog32))
-    {
-        $logfile = $fichierLog32;
-        $versionlog = "32";
-        echo '<div class="alert alert-success alert-anim" role="alert">';
-        echo "Fichier existant ".$fichierLog = INI_Conf_Moteur($_SESSION['opensim_select'],"address").'OpenSim.32BitLaunch.log';
-        echo '<strong> OpenSim.32BitLaunch.log</strong>';
-        echo '</div>';
-    }
+	
 
-    else if ($_POST['cmd'])
-    {
-        echo '<div class="alert alert-danger alert-anim" role="alert">';
-        echo "Le fichier <strong>OpenSim.32BitLaunch.log</strong> n'existe pas";
-        echo '</div>';
-    }
 
     $fichierLog64 = INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.log';
-	
     if (file_exists($fichierLog64))
     {
         $logfile = $fichierLog32;
@@ -80,15 +63,12 @@ if (isset($_SESSION['authentification']))
         echo '<strong> OpenSim.log</strong>';
         echo '</div>';
     }
-
     else if ($_POST['cmd'])
     {
         echo '<div class="alert alert-danger alert-anim" role="alert">';
         echo "Le fichier <strong>OpenSim.log</strong> n'existe pas"; 
         echo '</div>';
     }
-    
-    else $logfile = "";
 	
     $taille_fichier = filesize($fichierLog);
 
@@ -101,8 +81,7 @@ if (isset($_SESSION['authentification']))
     echo '<input type="hidden" value="'.$versionlog.'" name="versionLog">';
     echo '<button type="submit" class="btn btn-danger" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Effacer le fichier <strong>Log</strong></button>';
     echo '</form>';
-
-    if ($versionlog) echo '<p class="pull-right"><span class="label label-info">System '.$versionlog.' Bits</span></p>';
+	
     echo '<p>Taille du Fichier Log <span class="badge">'.$taille_fichier.'</span></p>';
     
 

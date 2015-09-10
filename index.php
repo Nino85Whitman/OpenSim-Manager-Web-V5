@@ -393,9 +393,7 @@ else
         }
     ?>
 
-	<div class="checkbox">
-		<label><input type="checkbox" name="remember" value="1" id="Remember"> Remember me</label>
-	</div>
+
 
     <button class="btn btn-lg btn-default btn-block" type="submit">
         <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span> Authentification
@@ -405,11 +403,13 @@ else
 
 <div class="clearfix"></div>
 
+
+
+</div>
+
 <footer class="footer">
     <p class="text-center">Open Simulator Manager Web <?php echo date(Y); ?> - <?php echo INI_Conf(VersionOSMW, VersionOSMW); ?> </p>
 </footer>
-
-</div>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script src="js/bootstrap.min.js"></script>

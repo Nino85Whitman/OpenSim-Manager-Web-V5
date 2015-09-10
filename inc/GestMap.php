@@ -30,7 +30,7 @@ if (isset($_SESSION['authentification']))
     $oy = 0;
 
     // Limite de 50x50
-    $max = 10;
+    $max = 20;
     
     for ($x = -$max; $x < ($max - 1); $x++)
     {
@@ -104,20 +104,20 @@ if (isset($_SESSION['authentification']))
 
         // $select = "";
         $_SESSION['zooming_select'] = trim($_POST['zooming']);
-        if ($_SESSION['zooming_select'] == 10) {$select1 = "selected";}
-        if ($_SESSION['zooming_select'] == 20) {$select2 = "selected";}
-        if ($_SESSION['zooming_select'] == 30) {$select3 = "selected";}
-        if ($_SESSION['zooming_select'] == 50) {$select4 = "selected";}
-        if ($_SESSION['zooming_select'] == "") {$select5 = "selected";}
+        if ($_SESSION['zooming_select'] == 30) {$select1 = "selected";}
+        if ($_SESSION['zooming_select'] == 40) {$select2 = "selected";}
+        if ($_SESSION['zooming_select'] == 50) {$select3 = "selected";}
+        if ($_SESSION['zooming_select'] == 60) {$select4 = "selected";}
+        if ($_SESSION['zooming_select'] == 70) {$select5 = "selected";}
     }
 
     else
     {
-        if ($_SESSION['zooming_select'] == 10) {$select1 = "selected";}
-        if ($_SESSION['zooming_select'] == 20) {$select2 = "selected";}
-        if ($_SESSION['zooming_select'] == 30) {$select3 = "selected";}
-        if ($_SESSION['zooming_select'] == 50) {$select4 = "selected";}
-        if ($_SESSION['zooming_select'] == "") {$select5 = "selected";}
+        if ($_SESSION['zooming_select'] == 30) {$select1 = "selected";}
+        if ($_SESSION['zooming_select'] == 40) {$select2 = "selected";}
+        if ($_SESSION['zooming_select'] == 50) {$select3 = "selected";}
+        if ($_SESSION['zooming_select'] == 60) {$select4 = "selected";}
+        if ($_SESSION['zooming_select'] == 70) {$select5 = "selected";}
         $widthMap = $_SESSION['zooming_select'];
         $heightMap = $_SESSION['zooming_select'];
     }
@@ -125,11 +125,11 @@ if (isset($_SESSION['authentification']))
     echo '<form class="form-group" method=post action="">';
     echo '<div class="form-inline">';
     echo '<select class="form-control" name="zooming">';
-    echo '<option value="25" name="zooming" '.$select1.'>Zoom 1</option>';
-    echo '<option value="50" name="zooming" '.$select2.'>Zoom 2</option>';
-    echo '<option value="100" name="zooming" '.$select3.'>Zoom 3</option>';
-    echo '<option value="200" name="zooming" '.$select4.'>Zoom 4</option>';
-    echo '<option value="" name="zooming" '.$select5.'>Zoom 5</option>';
+    echo '<option value="30" name="zooming" '.$select1.'>Zoom 1</option>';
+    echo '<option value="40" name="zooming" '.$select2.'>Zoom 2</option>';
+    echo '<option value="50" name="zooming" '.$select3.'>Zoom 3</option>';
+    echo '<option value="60" name="zooming" '.$select4.'>Zoom 4</option>';
+    echo '<option value="70" name="zooming" '.$select5.'>Zoom 5</option>';
     echo '</select>';
     echo ' <button type="submit" class="btn btn-success" name="goto">';
     echo '<i class="glyphicon glyphicon-ok"></i> Appliquer Zoom';
