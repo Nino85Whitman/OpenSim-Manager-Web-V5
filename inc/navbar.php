@@ -43,7 +43,7 @@
 			<li <?php if ($_GET['a'] == 22) {echo 'class="active"';} ?>>
                 <a href="index.php?a=22"><i class="glyphicon glyphicon-globe"></i> Map</a>
             </li>
-			<li <?php if ($_GET['a'] == 22) {echo 'class="active"';} ?>>
+			<li <?php if ($_GET['a'] == 21) {echo 'class="active"';} ?>>
                 <a href="index.php?a=21"><i class="glyphicon glyphicon-link"></i> HG</a>
             </li>
 			

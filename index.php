@@ -139,6 +139,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['pas
             $_SESSION['opensim_select'] = $data['id_os'];
             break;
         }
+		
     }
 	mysql_close();
 }
@@ -202,6 +203,7 @@ if (isset($_SESSION['authentification']))
 
 	// DISPLAY BOOTSTRAP MENU
 	include_once './inc/navbar.php';
+	
 ?>
 
 <?php
@@ -246,12 +248,22 @@ if (isset($_SESSION['authentification']))
         // *******************
         // AFFICHAGE PRINCIPAL
         // *******************
-        echo '<p class="pull-right"><span class="label label-danger">Espace Securise Niveau '.$_SESSION['privilege'].'</span></p>';
-      //  echo '<h1>Home</h1>';
-        echo '<div class="clearfix"></div>';
-
-        Securite_Simulateur();
-
+	echo Affichage_Entete($_SESSION['opensim_select']);
+	$moteursOK = Securite_Simulateur();
+    /* ************************************ */
+	//SECURITE MOTEUR
+	$btnN1 = "disabled";$btnN2 = "disabled";$btnN3 = "disabled";
+	if ($_SESSION['privilege'] == 4) {$btnN1 = ""; $btnN2 = ""; $btnN3 = "";} // Niv 4
+	if ($_SESSION['privilege'] == 3) {$btnN1 = ""; $btnN2 = ""; $btnN3 = "";} // Niv 3
+	if ($_SESSION['privilege'] == 2) {$btnN1 = ""; $btnN2 = "";}              // Niv 2
+	if ($moteursOK == "OK" )
+	{
+		if($_SESSION['privilege'] == 1)
+		{$btnN1 = "";$btnN2 = "";$btnN3 = "";}
+	}
+     //SECURITE MOTEUR
+    /* ************************************ */
+	echo Select_Simulateur($_SESSION['opensim_select']);
         ?>
 
 		<?php if(isset($_SESSION['flash'])): ?>
@@ -297,12 +309,6 @@ if (isset($_SESSION['authentification']))
 		// TABS ADMINS
         // ***********
 		echo '<div class="tab-pane fade in" id="admin">';
-		if ($_SESSION['privilege'] >= 3)
-		{
-			echo '<p><a class="btn btn-default btn-block" href="?a=15">Gestion des Utilisateurs</a>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=17">Gestion des Simulateurs</a></p>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=6">Gestion des Regions</a></p>';
-		}
 		if ($_SESSION['privilege'] >= 4)
 		{
 			echo '<p><a class="btn btn-default btn-block" href="?a=15">Gestion des Utilisateurs</a>';
@@ -311,6 +317,13 @@ if (isset($_SESSION['authentification']))
 			echo '<p><a class="btn btn-default btn-block" href="?a=18">Configuration du Manager</a></p>';
 		    echo '<p><a class="btn btn-default btn-block" href="?a=5">Configuration des Fichiers INI</a></p>';
 		}
+		elseif ($_SESSION['privilege'] >= 3)
+		{
+			echo '<p><a class="btn btn-default btn-block" href="?a=15">Gestion des Utilisateurs</a>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=17">Gestion des Simulateurs</a></p>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=6">Gestion des Regions</a></p>';
+		}
+
 		
 		echo '</div>';
 		echo '</div>';
@@ -393,7 +406,7 @@ else
 <div class="clearfix"></div>
 
 <footer class="footer">
-    <p class="text-center">Open Simulator Web Manager <?php echo date(Y); ?> - <?php echo INI_Conf(VersionOSMW, VersionOSMW); ?> </p>
+    <p class="text-center">Open Simulator Manager Web <?php echo date(Y); ?> - <?php echo INI_Conf(VersionOSMW, VersionOSMW); ?> </p>
 </footer>
 
 </div>

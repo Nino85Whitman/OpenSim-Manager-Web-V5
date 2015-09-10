@@ -20,6 +20,8 @@ if (isset($_SESSION['authentification']))
     echo '<h1>Liens Hypergrid</h1>';
     echo '<div class="clearfix"></div>';
 
+	echo Select_Simulateur($_SESSION['opensim_select']);
+	
     //******************************************************
     //  Affichage page principale
     //******************************************************
@@ -34,7 +36,7 @@ if (isset($_SESSION['authentification']))
     // *******************************************************
     $db = mysql_connect($hostnameBDD, $userBDD, $passBDD);
     mysql_select_db($database,$db);
-	$sql = 'SELECT * FROM moteurs';
+	$sql = 'SELECT * FROM moteurs WHERE id_os="'.$_SESSION['opensim_select'].'"';
     $req = mysql_query($sql) or die('Erreur SQL !<p>'.$sql.'</p>'.mysql_error());
 
 		
