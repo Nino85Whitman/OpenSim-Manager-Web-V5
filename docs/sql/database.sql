@@ -31,7 +31,7 @@ CREATE TABLE `config` (
   `VersionOSMW` varchar(50) NOT NULL,
   `urlOSMW` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -40,7 +40,7 @@ CREATE TABLE `config` (
 
 LOCK TABLES `config` WRITE;
 /*!40000 ALTER TABLE `config` DISABLE KEYS */;
-INSERT INTO `config` VALUES (1,'/osmw5/','fgagod@gmail.com',1,5,'Version 5.5','/osmw5/');
+INSERT INTO `config` VALUES (1,'/osmw5/','contact@mail.com',1,5,'Version 5.5','/osmw5/');
 /*!40000 ALTER TABLE `config` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -69,7 +69,7 @@ CREATE TABLE `moteurs` (
 
 LOCK TABLES `moteurs` WRITE;
 /*!40000 ALTER TABLE `moteurs` DISABLE KEYS */;
-INSERT INTO `moteurs` VALUES (6,'Opensim_6','Heartland II','Opensim 0.8.1','C:/OpenSimulator/opensim_mia/','OpensimDB','hg.francogrid.org:80'),(1,'Opensim_1','FrancoGrid','Opensim 0.8.1','C:/OpenSimulator/opensim/','OpensimDB','hg.francogrid.org:80'),(3,'Opensim_3','FestAvi 2015','Opensim 0.8.1','C:/OpenSimulator/opensim_cherry/','OpensimDB','hg.francogrid.org:80'),(5,'Opensim_5','Conference','Opensim 0.8.1','C:/OpenSimulator/opensim_conference/','OpensimDB','hg.francogrid.org:80');
+INSERT INTO `moteurs` VALUES (1,'Opensim_1','Opensim_1','Opensim 0.8.2','C:/OpenSimulator/opensim/','OpensimDB','hg.francogrid.org:80');
 /*!40000 ALTER TABLE `moteurs` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -97,7 +97,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'Nino85','Whitman','27eedc1e245d7253a951f5960a239661ef2556fa',4,'');
+INSERT INTO `users` VALUES (1,'super','admin','5baa61e4c9b93f3f0682250b6cf8331b7ee68fd8',4,'');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
