@@ -1,19 +1,28 @@
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ 
 Configuration requise pour OpenSim Manager Web (OSMW):
-	--  Apache / Mysql 
+	--  Apache ou xampp ou wampp ou ngnix / Mysql 
 Fonctionnement:
-	-- OSMW envoi des commandes au simulateur via Remote Admin sauf pour le START (Demarrage)
-	-- Le simulateur est lancé par le fichier batch "RunOpensim.sh" ou .bat qui contient le nom du Simulateur
+	-- OSMW envoi des commandes au simulateur via Remote Admin 
 	-- Certains fichiers doivent avoir les droits 777 pour pouvoir etre modifier par OSMW (LINUX)
 	
-	-- ATTENTION aux droits d'accés aux fichiers et le format des données saisie dans vos fichiers INI
+	-- ATTENTION aux droits d'accés aux fichiers et le format des données saisie dans vos fichiers INI 
+		ex: pour remote admin pas de guillemt
+		
 		--> Régions.ini (droits écriture) / OpensimDefaults.ini , etc.. qui doivent etre accessible
+Pour Windows:
+------------
+		--> pas de soucis
+Pour Linux:
+------------
+		--> ATTENTION aux droits d'ecritures
+		
 Gestion des Utilisateurs:
 	=> 5 Niveaux d'accés sont autorisés
 	-- Administrateurs 
 	-- Gestionnaires de sauvegardes
 	-- Invités / Compte privé par moteur
-	-- 1 compte root
+	-- 1 compte root (super admin)
+	
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 ******************************************
