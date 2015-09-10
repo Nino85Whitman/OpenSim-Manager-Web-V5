@@ -14,7 +14,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 	echo Select_Simulateur($_SESSION['opensim_select']);
 
 	//******************************************************
-	// CONSTRUCTION de la commande pour ENVOI sur la console via  SSH
+	// CONSTRUCTION de la commande pour ENVOI via RAdmin
 	//******************************************************
     if (isset($_POST['cmd']))
     {
@@ -50,6 +50,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<td><input class="form-control" type="text" name="InternalPort" placeholder="9000" '.$btnN3.'></td>';
             echo '<td><input class="form-control" type="text" name="ExternalHostName" placeholder="domaine.com" '.$btnN3.'></td>';
             echo '<td><input class="form-control" type="text" name="RegionUUID" value="'.GenUUID().'" '.$btnN3.'></td>';
+			echo '<td><input class="form-control" type="text" name="SizeX" value="256" '.$btnN3.'></td>';
+			echo '<td><input class="form-control" type="text" name="SizeY" value="256" '.$btnN3.'></td>';
             echo '<td><button class="btn btn-success" type="submit" value="Enregistrer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-ok"></i> Ajouter</button></td>';
             echo '</table>';
             echo '</form>';
@@ -63,6 +65,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             $tableauIni[$_POST['NewName']]['InternalAddress']   = "0.0.0.0";
             $tableauIni[$_POST['NewName']]['InternalPort']      = $_POST['InternalPort'];
             $tableauIni[$_POST['NewName']]['ExternalHostName']  = $_POST['ExternalHostName'];
+			$tableauIni[$_POST['NewName']]['SizeX']  			= $_POST['SizeX'];
+			$tableauIni[$_POST['NewName']]['SizeY']				= $_POST['SizeY'];			
 
             // Enregistrement du nouveau fichier 
             $fp = fopen (INI_Conf_Moteur($_SESSION['opensim_select'], "address")."Regions/RegionTemp.ini", "w");  
@@ -70,12 +74,14 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             while (list($key, $val) = each($tableauIni))
             {
                 fputs($fp, "[".$key."]\r\n");
-                fputs($fp, "RegionUUID          = ".$tableauIni[$key]['RegionUUID']."\r\n");
-                fputs($fp, "Location            = ".$tableauIni[$key]['Location']."\r\n");
-                fputs($fp, "InternalAddress     = 0.0.0.0\r\n");
-                fputs($fp, "InternalPort        = ".$tableauIni[$key]['InternalPort']."\r\n");
+                fputs($fp, "RegionUUID = ".$tableauIni[$key]['RegionUUID']."\r\n");
+                fputs($fp, "Location = ".$tableauIni[$key]['Location']."\r\n");
+                fputs($fp, "InternalAddress = 0.0.0.0\r\n");
+                fputs($fp, "InternalPort = ".$tableauIni[$key]['InternalPort']."\r\n");
                 fputs($fp, "AllowAlternatePorts = False\r\n");
-                fputs($fp, "ExternalHostName    = ".$tableauIni[$key]['ExternalHostName']."\r\n");
+                fputs($fp, "ExternalHostName = ".$tableauIni[$key]['ExternalHostName']."\r\n");
+				fputs($fp, "SizeX = ".$tableauIni[$key]['SizeX']."\r\n");
+				fputs($fp, "SizeY = ".$tableauIni[$key]['SizeY']."\r\n");					
             }
             fclose ($fp);  
       
@@ -98,6 +104,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
                 $tableauIni[$_POST['NewName']]['InternalAddress']   = "0.0.0.0";
                 $tableauIni[$_POST['NewName']]['InternalPort']      = $_POST['InternalPort'];
                 $tableauIni[$_POST['NewName']]['ExternalHostName']  = $_POST['ExternalHostName'];
+				$tableauIni[$_POST['NewName']]['SizeX']  			= $_POST['SizeX'];
+				$tableauIni[$_POST['NewName']]['SizeY']				= $_POST['SizeY'];				
             }
 
             if ($_POST['name_sim'] <> $_POST['NewName'])
@@ -109,6 +117,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
                 $tableauIni[$_POST['NewName']]['InternalAddress']   = "0.0.0.0";
                 $tableauIni[$_POST['NewName']]['InternalPort']      = $_POST['InternalPort'];
                 $tableauIni[$_POST['NewName']]['ExternalHostName']  = $_POST['ExternalHostName'];
+				$tableauIni[$_POST['NewName']]['SizeX']  			= $_POST['SizeX'];
+				$tableauIni[$_POST['NewName']]['SizeY']				= $_POST['SizeY'];
                 
                 // MODIFIER chaque valeur pour la region sellectionner ==> SUPPRESSION  Ancien
                 unset($tableauIni[$_POST['name_sim']]['RegionUUID']);
@@ -117,6 +127,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
                 unset($tableauIni[$_POST['name_sim']]['InternalPort']);
                 unset($tableauIni[$_POST['name_sim']]['AllowAlternatePorts']);
                 unset($tableauIni[$_POST['name_sim']]['ExternalHostName']);
+				unset($tableauIni[$_POST['name_sim']]['SizeX']);
+				unset($tableauIni[$_POST['name_sim']]['SizeY']);				
                 unset($tableauIni[$_POST['name_sim']]);
             }
 
@@ -125,12 +137,14 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             while (list($key, $val) = each($tableauIni))
             {
                 fputs($fp, "[".$key."]\r\n");
-                fputs($fp, "RegionUUID          = ".$tableauIni[$key]['RegionUUID']."\r\n");
-                fputs($fp, "Location            = ".$tableauIni[$key]['Location']."\r\n");
-                fputs($fp, "InternalPort        = ".$tableauIni[$key]['InternalPort']."\r\n");
-                fputs($fp, "InternalAddress     = 0.0.0.0\r\n");
+                fputs($fp, "RegionUUID = ".$tableauIni[$key]['RegionUUID']."\r\n");
+                fputs($fp, "Location = ".$tableauIni[$key]['Location']."\r\n");
+                fputs($fp, "InternalPort = ".$tableauIni[$key]['InternalPort']."\r\n");
+                fputs($fp, "InternalAddress = 0.0.0.0\r\n");
                 fputs($fp, "AllowAlternatePorts = False\r\n");
-                fputs($fp, "ExternalHostName    = ".$tableauIni[$key]['ExternalHostName']."\r\n");
+                fputs($fp, "ExternalHostName = ".$tableauIni[$key]['ExternalHostName']."\r\n");
+				fputs($fp, "SizeX = ".$tableauIni[$key]['SizeX']."\r\n");
+				fputs($fp, "SizeY = ".$tableauIni[$key]['SizeY']."\r\n");				
             }
             fclose ($fp);  
             // Suppression de l'original
@@ -153,6 +167,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             unset($tableauIni[$_POST['name_sim']]['InternalPort']);
             unset($tableauIni[$_POST['name_sim']]['AllowAlternatePorts'] );
             unset($tableauIni[$_POST['name_sim']]['ExternalHostName']);
+			unset($tableauIni[$_POST['name_sim']]['SizeX']);
+			unset($tableauIni[$_POST['name_sim']]['SizeY']);
             unset($tableauIni[$_POST['name_sim']]);
 
             // Enregistrement du nouveau fichier 
@@ -167,6 +183,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
                 fputs($fp, "InternalPort        = ".$tableauIni[$key]['InternalPort']."\r\n");
                 fputs($fp, "AllowAlternatePorts = False\r\n");
                 fputs($fp, "ExternalHostName    = ".$tableauIni[$key]['ExternalHostName']."\r\n");
+				fputs($fp, "SizeX				= ".$tableauIni[$key]['SizeX']."\r\n");
+				fputs($fp, "SizeY				= ".$tableauIni[$key]['SizeY']."\r\n");
             }
 
             fclose ($fp);  
@@ -231,6 +249,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
     echo '<th>Port Http</th>';
     echo '<th>Public Ip</th>';
     echo '<th>Uuid</th>';
+	echo '<th>Size X</th>';
+	echo '<th>Size Y</th>';
     echo '<th>Modify</th>';
     echo '<th>Delete</th>';
     echo '</tr>';
@@ -246,6 +266,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		echo '<td><input class="form-control" type="text" name="InternalPort" value="'.$tableauIni[$key]['InternalPort'].'" '.$btnN3.'></td>';
         echo '<td><input class="form-control" type="text" name="ExternalHostName" value="'.$tableauIni[$key]['ExternalHostName'].'" '.$btnN3.'></td>';
 		echo '<td><input class="form-control" type="text" name="RegionUUID" value="'.$tableauIni[$key]['RegionUUID'].'" '.$btnN3.'></td>';
+		echo '<td><input class="form-control" type="text" name="sizeX" value="'.$tableauIni[$key]['SizeX'].'" '.$btnN3.'></td>';
+		echo '<td><input class="form-control" type="text" name="sizeY" value="'.$tableauIni[$key]['SizeY'].'" '.$btnN3.'></td>';
 		echo '<td><button class="btn btn-success" type="submit" value="Modifier" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> Modifier</button></td>';
         echo '<td><button class="btn btn-danger" type="submit" value="Supprimer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Supprimer</button></td>';
 		echo '</tr>';

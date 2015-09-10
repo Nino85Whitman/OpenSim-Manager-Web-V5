@@ -295,12 +295,12 @@ if (isset($_SESSION['authentification']))
 				  <div class="panel-body">
 				      <div class="tab-content">';
 		echo '<div class="tab-pane fade in active" id="user">';
-		echo '<p><a class="btn btn-default btn-block" href="?a=1">Gestion des Regions</a></p>';
-		echo '<p><a class="btn btn-default btn-block" href="?a=10">Gestion des Sauvegardes</a></p>';
-		echo '<p><a class="btn btn-default btn-block" href="?a=7">Gestion des Logs</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=1">Etats des Regions</a></p>';
 		echo '<p><a class="btn btn-default btn-block" href="?a=2">Sauvegarder une Region</a></p>';
 		echo '<p><a class="btn btn-default btn-block" href="?a=3">Sauvegarder un Terrain</a></p>';
-        echo '<p><a class="btn btn-default btn-block" href="?a=4">Sauvegarder un Inventaire</a></p>';
+        echo '<p><a class="btn btn-default btn-block" href="?a=4">Sauvegarder un Inventaire</a></p>';		
+		echo '<p><a class="btn btn-default btn-block" href="?a=10">Les fichiers de Sauvegardes</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=7">Gestion du Log</a></p>';		
         echo '<p><a class="btn btn-default btn-block" href="?a=21">Liens Hypergrid</a></p>';
         echo '<p><a class="btn btn-default btn-block" href="?a=22">Afficher la Map</a></p>';
 		echo '</div>';
