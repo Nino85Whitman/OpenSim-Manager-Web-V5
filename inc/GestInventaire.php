@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Gestion des Regions</h1>';
+    echo '<h1>'.$osmw_index_4.'</h1>';
     echo '<div class="clearfix"></div>';
     //******************************************************
     //* Selon ACTION bouton => Envoi Commande via Remote Admin 
@@ -39,15 +39,14 @@ if (isset($_SESSION['authentification']))
 
                 echo "<div class='alert alert-success alert-anim'>";
                 echo "<i class='glyphicon glyphicon-ok'></i>";
-                echo " Demande effectuee avec succes <strong>".$fullname."</strong>, veuillez consulter le log. Le traitement peut etre long selon votre inventaire ...</div>";
-                // echo "<a class='btn btn-default btn-primary' href='index.php?a=7'><i class='glyphicon glyphicon-eye-open'></i> Consulter le Ficher Log complet</a>";
+                echo " ".$osmw_label_msg_inventaire1." <strong>".$fullname."</strong>, ".$osmw_label_msg_inventaire2." ...</div>";
             }
             
             else
             {
                 echo "<div class='alert alert-danger alert-anim'>";
                 echo "<i class='glyphicon glyphicon-remove'></i>";
-                echo " <strong>Login</strong> ou <strong>Mot de passe</strong> invalide ...</div>";
+                echo " <strong>Login</strong> or <strong>Password</strong> error ...</div>";
             }
 		}  
 	}
@@ -75,7 +74,7 @@ if (isset($_SESSION['authentification']))
 	echo '<td><input class="form-control" type="password" name="pass"></td>';
 	echo '<td>
 			  <input type="hidden" value="" name="name_sim">
-			  <button class="btn btn-success" type="submit" value="Recuperer" name="cmd" '.$btnN1.'>
+			  <button class="btn btn-success" type="submit" value="'.$osmw_btn_recuperer.'" name="cmd" '.$btnN1.'>
               <i class="glyphicon glyphicon-save"></i>  Save IAR</button>
 		  </td>';
 	echo '</tr>';

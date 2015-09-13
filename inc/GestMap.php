@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Regions Map</h1>';
+    echo '<h1>'.$osmw_index_22.'</h1>';
     echo '<div class="clearfix"></div>';
         
 
@@ -132,7 +132,7 @@ if (isset($_SESSION['authentification']))
     echo '<option value="70" name="zooming" '.$select5.'>Zoom 5</option>';
     echo '</select>';
     echo ' <button type="submit" class="btn btn-success" name="goto">';
-    echo '<i class="glyphicon glyphicon-ok"></i> Appliquer Zoom';
+    echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_map_zoom;
     echo '</button>';
     echo '</div>';
     

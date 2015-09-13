@@ -4,7 +4,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 	echo Affichage_Entete($_SESSION['opensim_select']);
 
 
-    echo '<h1>Configuration des Regions</h1>';
+    echo '<h1>'.$osmw_index_6.'</h1>';
     echo '<div class="clearfix"></div>';
 	
     //******************************************************
@@ -26,10 +26,10 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
         $filename = INI_Conf_Moteur($_SESSION['opensim_select'], "address")."Regions/Regions.ini";
 
         if (file_exists($filename)) {;}
-        else {echo "<div class='alert alert-danger alert-anim'>Le fichier $filename n'existe pas.</div>";}
+        else {echo "<div class='alert alert-danger alert-anim'> <trong>$filename </trong>".$osmw_erreur_file_exist."</div>";}
 
         $tableauIni = parse_ini_file($filename, true);
-        if ($tableauIni == FALSE) {echo '<p>Probleme de lecture du fichier .ini $filename</p>';}
+        if ($tableauIni == FALSE) {echo '<p>".$osmw_erreur_file_ini_exist." $filename</p>';}
 
         if ($_POST['cmd'] == 'Ajouter')
         {
@@ -41,7 +41,9 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<th>Internal Port</th>';
             echo '<th>Public IP</th>';
             echo '<th>Uuid (auto generate)</th>';
-            echo '<th>Action</th>';
+			echo '<th>Size X</th>';
+			echo '<th>Size Y</th>';
+			echo '<th> </th>';
             echo '</tr>';
 
             echo '<tr>';
@@ -52,7 +54,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<td><input class="form-control" type="text" name="RegionUUID" value="'.GenUUID().'" '.$btnN3.'></td>';
 			echo '<td><input class="form-control" type="text" name="SizeX" value="256" '.$btnN3.'></td>';
 			echo '<td><input class="form-control" type="text" name="SizeY" value="256" '.$btnN3.'></td>';
-            echo '<td><button class="btn btn-success" type="submit" value="Enregistrer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-ok"></i> Ajouter</button></td>';
+            echo '<td><button class="btn btn-success" type="submit" value="Enregistrer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_ajout_user.'</button></td>';
             echo '</table>';
             echo '</form>';
         }
@@ -90,7 +92,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Region <strong>".$_POST['NewName']."</strong> enregistree avec succes</p>";
+            echo " Region <strong>".$_POST['NewName']."</strong> ".$osmw_save_user_ok."</p>";
         }
 
         if ($_POST['cmd'] == 'Modifier')
@@ -155,7 +157,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Region <strong>".$_POST['NewName']."</strong> modifiee avec succes</p>";
+            echo " Region <strong>".$_POST['NewName']."</strong> ".$osmw_edit_user_ok."</p>";
         } 
 
         if ($_POST['cmd'] == 'Supprimer')
@@ -193,7 +195,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Region <strong>".$_POST['NewName']."</strong> supprimee avec succes</p>";
+            echo " Region <strong>".$_POST['NewName']."</strong> ".$osmw_delete_user_ok."</p>";
         } 
     }
 
@@ -209,7 +211,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
     {
         echo "<p class='alert alert-success alert-anim'>";
         echo "<i class='glyphicon glyphicon-ok'></i>";
-        echo " Fichier <strong>".$filename2."</strong> innexistant ...</p>";
+        echo " <strong>".$filename2."</strong> ".$osmw_erreur_file_exist."</p>";
     }
 
     $tableauIni = parse_ini_file($filename, true);
@@ -217,7 +219,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
     {
         echo "<p class='alert alert-success alert-anim'>";
         echo "<i class='glyphicon glyphicon-ok'></i>";
-        echo " Problemes de lecture du fichier .ini <strong>".$filename."</strong> ...</p>";
+        echo " $osmw_erreur_file_ini_exist <strong>".$filename."</strong> ...</p>";
     }
     
     $i = 0;
@@ -227,8 +229,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 	if (INI_Conf("Parametre_OSMW","Autorized") == '1') 
 	{
 		$RegionMax = INI_Conf("NbAutorized", "NbAutorized");
-		echo '<p>Nombre Maximum de Regions Aurorisees <span class="badge">'.$RegionMax.'</span></p>';
-		echo '<p>Nombre total de Regions <span class="badge">'.count($tableauIni).'</span></p>';
+		echo '<p>'.$osmw_label_nb_max_sim .' <span class="badge">'.$RegionMax.'</span></p>';
+		echo '<p>'.$osmw_label_total_sim.' <span class="badge">'.count($tableauIni).'</span></p>';
 		if (count($tableauIni) == $RegionMax ){$btn = 'disabled';}
 		else {$btn = $btnN3;}
 
@@ -237,7 +239,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 		echo '<form class="form-group" method="post" action="">';
 		echo '<input type="hidden" name="cmd" value="Ajouter">';
-		echo '<button class="btn btn-success" type="submit" '.$btn.'><i class="glyphicon glyphicon-ok"></i> Ajouter une Region</button>';
+		echo '<button class="btn btn-success" type="submit" '.$btn.'><i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_ajout_user.'</button>';
 		echo '</form>';
 	}
 
@@ -268,8 +270,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		echo '<td><input class="form-control" type="text" name="RegionUUID" value="'.$tableauIni[$key]['RegionUUID'].'" '.$btnN3.'></td>';
 		echo '<td><input class="form-control" type="text" name="sizeX" value="'.$tableauIni[$key]['SizeX'].'" '.$btnN3.'></td>';
 		echo '<td><input class="form-control" type="text" name="sizeY" value="'.$tableauIni[$key]['SizeY'].'" '.$btnN3.'></td>';
-		echo '<td><button class="btn btn-success" type="submit" value="Modifier" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> Modifier</button></td>';
-        echo '<td><button class="btn btn-danger" type="submit" value="Supprimer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Supprimer</button></td>';
+		echo '<td><button class="btn btn-success" type="submit" value="Modifier" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> '.$osmw_btn_modifier.'</button></td>';
+        echo '<td><button class="btn btn-danger" type="submit" value="Supprimer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> '.$osmw_btn_supprimer.'</button></td>';
 		echo '</tr>';
 		echo '</form>';
 		echo '</tr>';

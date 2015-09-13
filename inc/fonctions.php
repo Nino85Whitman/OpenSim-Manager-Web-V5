@@ -1,4 +1,5 @@
 <?php
+
 	function debug($variable)
 	{
 		echo '<pre>' . print_r($variable, true) . '</pre>';
@@ -15,7 +16,15 @@
 	/* ************************************ */
 	function Select_Simulateur($simu)
 	{	
+		if ($translator && isset($_SESSION['authentification']))
+		{
+			require_once ('./inc/translator.php');
+			echo('<div class="pull-right">');
+			include_once("./inc/flags.php");
+			echo('</div>');
+		}
 		require 'inc/config.php';
+		
 		// Formulaire de choix du moteur a selectionne
 		// On se connecte a MySQL
 		$db = mysql_connect($hostnameBDD, $userBDD, $passBDD);
@@ -27,7 +36,7 @@
 
 		echo '<form class="form-group" method="post" action="">';	
 		echo '<div class="form-inline">';
-		echo '<label for="OSSelect"></label>Choix du simulateur ';
+		echo '<label for="OSSelect"></label>';
 		echo '<select class="form-control" name="OSSelect">';
 
 		while($data = mysql_fetch_assoc($req))
@@ -38,7 +47,7 @@
 		}
 		
 		echo'</select>';
-		echo' <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> Choisir</button>';
+		echo' <button type="submit" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i></button>';
 		echo '</div>';
 		echo'</form>';
 
@@ -54,7 +63,7 @@
 		
 		return '<table style="width:100%"><tr>
 		<td align=left><p> <strong class="label label-info">'.INI_Conf_Moteur($simu, "name").' -- '.INI_Conf_Moteur($simu, "version").'</strong></p></td>
-		<td align=right><p class="pull-right"><span class="label label-danger">Espace Securise Niveau '.$_SESSION['privilege'].'</span></p></td>
+		<td align=right><p class="pull-right"><span class="label label-danger">Security level <span class="label label-default">'.$_SESSION['privilege'].'</span></span></p></td>
 		</tr></table>';
 		 
 	}	
@@ -89,7 +98,7 @@
 		if (file_exists($filenameINPUT)) {$filename = $filenameINPUT ;}
 	
 		if (!$fp = fopen($filename, "r")) 
-		{			echo '<p>Erreur: Ouverture du fichier '.$filename.'</p>';		}
+		{			echo '<p>Erreur: '.$filename.'</p>';		}
 	
 		$tabfich = file($filename); 
 		
@@ -117,7 +126,7 @@
 
 		// **** Recuperation du port http du serveur ******		
 		if (!$fp = fopen($filename, "r")) 
-		{			echo '<p>Erreur: Ouverture du fichier '.$filename.'</p>';		}
+		{			echo '<p>Erreur: '.$filename.'</p>';		}
 	
 		$tabfich = file($filename); 
 		
@@ -257,24 +266,12 @@
 		error_reporting(E_ERROR | E_PARSE);
 		if (!fsockopen($tab['host'], $tab['port'], $errno, $errstr, 5))
 		{
-			
-			//echo "$errstr ($errno)<br />\n";
 			 return false;
 		} else 
 		{
 			 return true;
 		}
-		
-		/*
-        if (false != ($fp = fsockopen($tab['host'], $tab['port'], $errno, $errstr, 5)))
-        {
-            fclose($fp);
-            // echo 'Location: ' . $server; 
-            return true;
-        }
-        // echo 'Erreur #' . $errno . ' : ' . $errstr;
-		*/
-       // return false;
+	
 	   error_reporting(-1);
     }
 	
@@ -407,7 +404,7 @@
                         echo '<input type="hidden" value="'.$_SESSION['opensim_select'].'" name="name_sim">';
                         echo '<input type="hidden" value="'.$elem['name'].'" name="name_file">';
                         echo ' <button class="btn btn-danger" type="submit" value="delete" name="cmd" >';
-                        echo '<i class="glyphicon glyphicon-trash"></i> Effacer</button>';
+                        echo '<i class="glyphicon glyphicon-trash"></i> Delete</button>';
                         echo '</td>';
                         echo '</form>';
                     }
@@ -422,7 +419,7 @@
                         echo '<i class="glyphicon glyphicon-download-alt"></i> Download</button>';
                         echo '<td>';
                         echo ' <button class="btn btn-danger" type="submit" value="delete" name="cmd" '.$btnN2.'>';
-                        echo '<i class="glyphicon glyphicon-trash"></i> Effacer</button>';
+                        echo '<i class="glyphicon glyphicon-trash"></i> Delete</button>';
                         echo '</td>';
                         echo '</form>';
                     }
@@ -433,7 +430,7 @@
                         echo '<i class="glyphicon glyphicon-download-alt"></i> Download</button>';
                         echo '<td>';
                         echo ' <button class="btn btn-danger" type="submit" name="cmd" disabled>';
-                        echo '<i class="glyphicon glyphicon-trash"></i> Effacer</button>';
+                        echo '<i class="glyphicon glyphicon-trash"></i> Delete</button>';
                         echo '</td>';
                         echo '</form>';
                     }

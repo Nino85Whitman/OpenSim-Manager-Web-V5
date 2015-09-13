@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 	
-    echo '<h1>Gestion des Fichiers Log</h1>';
+    echo '<h1>'.$osmw_index_7.'</h1>';
     echo '<div class="clearfix"></div>';
 	
 	
@@ -36,9 +36,7 @@ if (isset($_SESSION['authentification']))
 			{
 				$cheminWIN = str_replace('/','\\', INI_Conf_Moteur($_SESSION['opensim_select'], "address"));
 			}
-
-			if ($_POST['versionLog'] == "32") {unlink($cheminWIN."OpenSim.32BitLaunch.log");}
-			if ($_POST['versionLog'] == "64") {unlink($cheminWIN."OpenSim.log");}
+			unlink($cheminWIN."OpenSim.log");
 		}  
 	}
 
@@ -47,26 +45,19 @@ if (isset($_SESSION['authentification']))
     //******************************************************
 
 	echo Select_Simulateur($_SESSION['opensim_select']);
-
-    // Test du fichier log 32bit / 64bit
-    $versionlog = "";
 	
-
-
-    $fichierLog64 = INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.log';
-    if (file_exists($fichierLog64))
+	$fichierLog = INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.log';
+	
+    if (file_exists(INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.log'))
     {
-        $logfile = $fichierLog32;
-        $versionlog = "64";
         echo '<div class="alert alert-success alert-anim" role="alert">';
-        echo "Fichier existant " .$fichierLog = INI_Conf_Moteur($_SESSION['opensim_select'], "address").'OpenSim.log';
-        echo '<strong> OpenSim.log</strong>';
+        echo "File exist: <strong>" .$fichierLog.'</strong>';
         echo '</div>';
     }
     else if ($_POST['cmd'])
     {
         echo '<div class="alert alert-danger alert-anim" role="alert">';
-        echo "Le fichier <strong>OpenSim.log</strong> n'existe pas"; 
+        echo "File not exist: <strong>" .$fichierLog.'</strong>';
         echo '</div>';
     }
 	
@@ -77,14 +68,16 @@ if (isset($_SESSION['authentification']))
     else if ($taille_fichier >= 1024) {$taille_fichier = round($taille_fichier / 1024 * 100) / 100 . " Ko";}
     else {$taille_fichier = $taille_fichier . " o";}
 
-    echo '<form class="form-group" method="post" action="">';
-    echo '<input type="hidden" value="'.$versionlog.'" name="versionLog">';
-    echo '<button type="submit" class="btn btn-danger" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Effacer le fichier <strong>Log</strong></button>';
-    echo '</form>';
 	
-    echo '<p>Taille du Fichier Log <span class="badge">'.$taille_fichier.'</span></p>';
-    
-
+	if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
+	{		
+		echo '<form class="form-group" method="post" action="">';
+		echo '<input type="hidden" value="'.$versionlog.'" name="versionLog">';
+		echo '<button type="submit" class="btn btn-danger" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Delete <strong>Log</strong></button>';
+		echo '</form>';
+	}	
+	echo '<p>'.$osmw_label_file_size.' <span class="badge">'.$taille_fichier.'</span></p>';
+	
 	$fcontents = file($fichierLog);
 	$i = sizeof($fcontents) - 30;
     $aff = "";
@@ -97,8 +90,8 @@ if (isset($_SESSION['authentification']))
 
 	if (!$aff)
     {
-        if (!$logfile) $aff = "Le fichier Log est innexistant ...";
-        else $aff = "Le fichier Log ".$logfile." est vide ...";
+        if (!$logfile) $aff = "File not exist...";
+        else $aff = "File Log ".$logfile." is empty ...";
     }
     echo '<pre>'.$aff.'</pre>';
 

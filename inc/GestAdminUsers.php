@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Gestion des Utilisateurs</h1>';
+    echo '<h1>'.$osmw_index_15.'</h1>';
     echo '<div class="clearfix"></div>';
 	    //******************************************************
     //  Affichage page principale
@@ -38,17 +38,17 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 		if ($_POST['cmd'] == 'Reset')
 		{
-            echo '<h3>Modifier le Mot de passa</h3>';
+            echo '<h3>'.$osmw_label_modifier_password.'</h3>';
 			echo '<form method="post" action="">';
 			echo '<table class="table table-hover">';
 			echo '<input type="hidden" name="oldFirstName" value="'.$_POST['NewFirstName'].'" >';
 			echo '<input type="hidden" name="oldLastName" value="'.$_POST['NewLastName'].'" >';
 
             echo '<tr>';
-            echo '<th>Prenom</th>';
-            echo '<th>Nom</th>';
-            echo '<th>Nouveau Mot de Passe</th>';
-            echo '<th>Confirmer le nouveau Mot de Passe</th>';
+            echo '<th>Firstname</th>';
+            echo '<th>Lastname</th>';
+            echo '<th>'.$osmw_label_new_password.'</th>';
+            echo '<th>'.$osmw_label_new_password_confirm.'</th>';
             echo '<th>Action</th>';
             echo '</tr>';
 
@@ -57,7 +57,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<td>'.$_POST['NewLastName'].'</td>';
 			echo '<td><input class="form-control" type="password" name="NewPass1" value="" '.$btnN3.'></td>';
 			echo '<td><input class="form-control" type="password" name="NewPass2" value="" '.$btnN3.'></td>';
-			echo '<td><input class="btn btn-success" type="submit" value="Change" name="cmd" '.$btnN3.'></td>';
+			echo '<td><input class="btn btn-success" type="submit" value="'.$osmw_btn_modifier.'" name="cmd" '.$btnN3.'></td>';
 			echo '</tr>';
 			echo '</table>';
 			echo '</form>';
@@ -67,15 +67,15 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		if ($_POST['cmd'] == 'Ajouter')
 		{
             echo '<button class="btn btn-danger pull-right" type="submit" value="Annuler" onclick=location.href="index.php?a=15" '.$btnN3.'>';
-            echo '<i class="glyphicon glyphicon-remove"></i> Annuler</button>';
+            echo '<i class="glyphicon glyphicon-remove"></i> '.$osmw_btn_annuler.'</button>';
 
-            echo '<h3>Ajouter un Utilisateur</h3>';
+            echo '<h3>'.$osmw_btn_ajout_user.'</h3>';
 
             echo '<form method="post" action="">';
 			echo '<table class="table table-hover">';
 
             echo '<tr>';
-            echo '<th>Simulateurs</th>';
+            echo '<th>'.$osmw_label_simulator.'</th>';
             echo '<th>Privilege</th>';
             echo '<th>Firstname</th>';
             echo '<th>Lastname</th>';
@@ -96,18 +96,18 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '</td>';
 			echo '<td>';
             echo '<select class="form-control" name="username_priv">';
-            echo '<option value="1">Invite - Prive</option>';
-            echo '<option value="2">Gestionnaire</option>';
-            echo '<option value="3" >Administrateur</option>';
+            echo '<option value="1">Level 1</option>';
+            echo '<option value="2">Level 2</option>';
+            echo '<option value="3" >Level 3</option>';
             echo '</select>';
 			echo '</td>';
 
-			echo '<td><input class="form-control" type="text" name="NewFirstName" placeholder="Prenom" '.$btnN3.'></td>';
-			echo '<td><input class="form-control" type="text" name="NewLastName" placeholder="Nom" '.$btnN3.'></td>';
+			echo '<td><input class="form-control" type="text" name="NewFirstName" placeholder="Firstname" '.$btnN3.'></td>';
+			echo '<td><input class="form-control" type="text" name="NewLastName" placeholder="Lastname" '.$btnN3.'></td>';
 			echo '<td><input class="form-control" type="password" name="username_pass" placeholder="Password" '.$btnN3.'></td>';
             echo '<td>';
             echo '<button class="btn btn-success" type="submit" value="Enregistrer" name="cmd" '.$btnN3.'>';
-            echo '<i class="glyphicon glyphicon-ok"></i> Enregistrer';
+            echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_enregistrer;
             echo '</button>';
             echo '</td>';
 			echo '</tr>';
@@ -117,7 +117,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<div class="alert alert-warning fade in">';
             echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
             echo '<i class="glyphicon glyphicon-info-sign"></i>';
-            echo ' <strong>MODE Invite</strong>: Pas de Simulateur autorise coche = <strong>MODE Demo</strong> ou Simulateur(s) autorise(s) coche(s) = <strong>MODE Prive</strong>';
+            echo '  <strong>Level 1</strong>: '.$osmw_label_simu_ok.' -- <strong>Level 1</strong>: '.$osmw_label_simu_nok ;
             echo '</div>';
             echo '</td>';
             echo '</tr>';
@@ -142,14 +142,14 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
                 echo "<p class='alert alert-success alert-anim'>";
                 echo "<i class='glyphicon glyphicon-ok'></i>";
-		        echo "Mot de passe modifie avec succes ...</p>";
+		        echo $osmw_change_user_ok."</p>";
 		    }
 			
 			else
 			{
                 echo "<p class='alert alert-success alert-anim'>";
                 echo "<i class='glyphicon glyphicon-ok'></i>";
-			    echo "Mot de passe <b>NON</b> modifie, veuillez recommencer!</p>";
+			    echo $osmw_change_user_nok."!</p>";
 			}
 		}
 
@@ -181,7 +181,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Utilisateur <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> enregistre avec succes</p>";  
+            echo " User <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> ".$osmw_save_user_ok."</p>";  
 		}
 
 		// ******************************************************
@@ -211,7 +211,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
             echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Utilisateur <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> modifie avec succes</p>";            
+            echo " User <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> ".$osmw_edit_user_ok."</p>";            
         }
     }
 		
@@ -227,7 +227,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
         echo "<p class='alert alert-success alert-anim'>";
         echo "<i class='glyphicon glyphicon-ok'></i>";
-        echo " Utilisateur <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> supprime avec succes</p>";  
+        echo " User <strong>".$_POST['NewFirstName']." ".$_POST['NewLastName']."</strong> ".$osmw_delete_user_ok."</p>";  
     }
 
     // ******************************************************
@@ -238,10 +238,10 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
         echo '<form class="form-group pull-right" method="post" action="">';
         echo '<input type="hidden" value="Ajouter" name="cmd" '.$btnN3.'>';
         echo '<button class="btn btn-success" type="submit" '.$btnN3.'>';
-        echo '<i class="glyphicon glyphicon-ok"></i> Ajouter un Utilisateur</button>';
+        echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_ajout_user.'</button>';
         echo '</form>';
 
-        echo '<h3>Liste des Utilisateurs</h3>';
+        echo '<h3>'.$osmw_label_list_user.'</h3>';
 
         $sql = 'SELECT * FROM users ORDER BY id ASC';
         // $sql = 'SELECT * FROM users';
@@ -249,18 +249,18 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
         while ($data = mysql_fetch_assoc($req)) {$n++;}
 
-        echo "<p>Nombre total d'utilisateurs <span class='badge'>".$n."</span></p>";
+        echo '<p>'.$osmw_label_total_user.' <span class="badge">'.$n.'</span></p>';
 
         echo '<table class="table table-hover">';
         echo '<tr>';
         echo '<th>#</th>';
-        echo '<th>Simulateurs</th>';
+        echo '<th>'.$osmw_label_simulator.'</th>';
         echo '<th>Privilege</th>';
-        echo '<th>Prenom</th>';
-        echo '<th>Nom</th>';
+        echo '<th>Firstname</th>';
+        echo '<th>Lastname</th>';
         echo '<th>Password</th>';
-        echo '<th>Modifier</th>';
-        echo '<th>Supprimer</th>';
+        echo '<th>'.$osmw_btn_modifier.'</th>';
+        echo '<th>'.$osmw_btn_supprimer.'</th>';
         echo '</tr>';
 
         $sql = 'SELECT * FROM users ORDER BY id ASC';
@@ -283,7 +283,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
                 if ($_SESSION['privilege'] == 4)
                 {
-                    $privilegetxt4 = "<option value='4' selected>Super Administrateur</option>";
+                    $privilegetxt4 = "<option value='4' selected>Level 4</option>";
                     $block = "";
                     $btnN3 = "";
                     break;
@@ -291,7 +291,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 
                 else
                 {
-                    $privilegetxt4 = "<option value='4' selected>Super Administrateur</option>";
+                    $privilegetxt4 = "<option value='4' selected>Level 4</option>";
                     $block = "disabled";
                     $btnN3 = "disabled";
                     break;
@@ -302,7 +302,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<form class="form-group" method="post" action="">';
             echo '<td><div class="badge">'.$n.'</div></td>';
 
-            if ($data['privilege'] > 1) echo '<td>Tous les Simulateurs</td>';
+            if ($data['privilege'] > 1) echo '<td>'.$osmw_label_all_simulator.'</td>';
 
             if ($data['privilege'] == 1)
             {
@@ -340,22 +340,22 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             echo '<input type="hidden" name="oldLastName" value="'.$data['lastname'].'" >';
 
             echo '<select class="form-control" name="username_priv" '.$block.'>';
-            echo '<option value="1" '.$privilegetxt1.' >   Invite - Prive   </option>';
-            echo '<option value="2" '.$privilegetxt2.'>Gestionnaire</option>';
-            echo '<option value="3" '.$privilegetxt3.'>Administrateur</option>';
+            echo '<option value="1" '.$privilegetxt1.' >Level 1</option>';
+            echo '<option value="2" '.$privilegetxt2.'>Level 2</option>';
+            echo '<option value="3" '.$privilegetxt3.'>Level 3</option>';
 			if( $_SESSION['privilege']>= 4)
-				{echo '<option value="4" '.$privilegetxt4.'>Super Administrateur</option>';}
+				{echo '<option value="4" '.$privilegetxt4.'>Level 4</option>';}
 			else
-				{echo '<option value="4" '.$privilegetxt4.' disabled>Super Administrateur</option>';}
+				{echo '<option value="4" '.$privilegetxt4.' disabled>Level 4</option>';}
             echo '</select>';
             echo '</td>';
 
             echo '<td><input class="form-control" type="text" name="NewFirstName" value="'.$data['firstname'].'" '.$btnN3.'></td>';
             echo '<td><input class="form-control" type="text" name="NewLastName" value="'.$data['lastname'].'" '.$btnN3.'></td>';
-            echo '<td><button class="btn btn-danger" type="submit" name="cmd" value="Reset" '.$btnN3.'><i class="glyphicon glyphicon-refresh"></i> Reset</button></td>';
+            echo '<td><button class="btn btn-danger" type="submit" name="cmd" value="Reset" '.$btnN3.'><i class="glyphicon glyphicon-refresh"></i> '.$osmw_btn_reset.'</button></td>';
 
-            echo '<td><button class="btn btn-success" type="submit" value="Modifier" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> Modifier</button></td>';
-            echo '<td><button class="btn btn-danger" type="submit" value="Supprimer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Supprimer</button></td>';
+            echo '<td><button class="btn btn-success" type="submit" value="Modifier" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> '.$osmw_btn_modifier.'</button></td>';
+            echo '<td><button class="btn btn-danger" type="submit" value="Supprimer" name="cmd" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> '.$osmw_btn_supprimer.'</button></td>';
 
             echo '</form>';
             echo '</tr>';
@@ -367,8 +367,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
                 echo '<td colspan="8">';
                 echo '<div class="alert alert-warning fade in">';
                 echo '<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>';
-                echo '<i class="glyphicon glyphicon-info-sign"></i>';
-                echo ' <strong>MODE Invite</strong>: Pas de Simulateur autorise coche = <strong>MODE Demo</strong> ou Simulateur(s) autorise(s) coche(s) = <strong>MODE Prive</strong>';
+                echo '<i class="glyphicon glyphicon-info-sign">  </i>';
+                echo '  <strong>Level 1</strong>: '.$osmw_label_simu_ok.' -- <strong>Level 1</strong>: '.$osmw_label_simu_nok ;
                 echo '</div>';
                 echo '</td>';
                 echo '</tr>';

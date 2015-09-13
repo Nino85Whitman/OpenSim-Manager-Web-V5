@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 	
-    echo '<h1>Liens Hypergrid</h1>';
+    echo '<h1>'.$osmw_index_21.'</h1>';
     echo '<div class="clearfix"></div>';
 
 	echo Select_Simulateur($_SESSION['opensim_select']);

@@ -16,10 +16,12 @@
     <![endif]-->
 </head>
 <body>
+
 <div class="container">
 <h1>Open Simulator Manager Web Installer</h1>
 
 <?php if (!isset($_POST['etape'])): ?>
+
 <form class="form-horizontal" action="" method="post">
     <input type="hidden" name="etape" value="1" />
 
@@ -60,11 +62,12 @@
 
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button class="btn btn-success" type="submit" name="submit" value="Installer">Installer</button>
+            <button class="btn btn-success" type="submit" name="submit" value="Installer">Install</button>
         </div>
     </div>
 
 </form>
+
 <?php endif ?>
 
 <?php if (isset($_POST['delete']))
@@ -78,14 +81,14 @@
 if (isset($_POST['etape']) AND $_POST['etape'] == 1)
 {
     // on crée une constante dont on se servira plus tard
-    define('RETOUR', '<input class="btn btn-primary" type="button" value="Retour au formulaire" onclick="history.back()">');
+    define('RETOUR', '<input class="btn btn-primary" type="button" value="Return of form" onclick="history.back()">');
 
     $fichier = './inc/config.php';
 
     if (file_exists($fichier) AND filesize($fichier ) > 0)
     {
         // si le fichier existe et qu'il n'est pas vide alors
-        exit('<div class="alert alert-danger">Fichier de configuration existant, installation interompue ...</div>'. RETOUR);
+        exit('<div class="alert alert-danger">Not this configuration file, installation corrupt ...</div>'. RETOUR);
     }
 
     // on crée nos variables, et au passage on retire les éventuels espaces	
@@ -98,26 +101,26 @@ if (isset($_POST['etape']) AND $_POST['etape'] == 1)
     // on vérifie la connectivité avec le serveur avant d'aller plus loin
     if (!mysql_connect($hote, $login, $pass))
     {
-        exit('<div class="alert alert-danger">Mauvais parametres de connexion, installation interompue ...</div>'. RETOUR);
+        exit('<div class="alert alert-danger">Bad connection settings, installation corrupt ...</div>'. RETOUR);
     }
 
     // on vérifie la connectivité avec la base avant d'aller plus loin
     if (!mysql_select_db($base))
     {
-        exit('<div class="alert alert-danger">Mauvais nom de base, installation interompue ...</div>'. RETOUR);
+        exit('<div class="alert alert-danger">Wrong database name, installation corrupt ...</div>'. RETOUR);
     }
 
     // le texte que l'on va mettre dans le config.php
     $texte = '
 <?php
-$hostnameBDD   = "'. $hote .'";  // IP de votre serveur Bdd
-$userBDD  = "'. $login .'";       // nom utilisateur
-$passBDD    = "'. $pass .'";     // mot de passe 
-$database   = "'. $base .'"; // nom de votre base de donnees
-$hostnameSSH = "'.$domaine.'";
+$hostnameBDD   = "'. $hote .'";		// IP of Bdd
+$userBDD  = "'. $login .'";       	// login
+$passBDD    = "'. $pass .'";     	// password
+$database   = "'. $base .'"; 		// Name of BDD
+$hostnameSSH = "'.$domaine.'";		// Url of server
 
 
-/* Noms des fichiers INI  */
+/* name of files INI  */
 $FichierINIRegions = "Regions.ini";          // ou RegionConfig.ini
 $FichierINIOpensim = "OpenSimDefaults.ini";  // ou OpenSim.ini
 
@@ -126,16 +129,9 @@ $themes = true;
 
 /* Languages */
 $translator = true;
-$languages=array("fr" => "French",
-    "en" => "English",
-    "de" => "German",
-    "es" => "Spanish",
-    "it" => "Italian",
-    "nl" => "Dutch",
-    "pt" => "Portuguese",
-    "fi" => "Finnish",
-    "gr" => "Greek",
-    "slo" => "Slovenski");
+$languages=array(
+	"fr" => "French",
+    "en" => "English");
 
 /* Google ReCaptcha */
 $recaptcha = false;
@@ -143,7 +139,7 @@ $siteKey   = "***";
 $secret    = "***";
 $lang      = "fr";
 
-/* Position centre MAP */
+/* Position center of your MAP */
     $px = 7000;
     $py = 7000;
 
@@ -151,20 +147,19 @@ $lang      = "fr";
 
     if (!$ouvrir = fopen($fichier, 'w'))
     {
-        exit('<div class="alert alert-danger">Impossible d\'ouvrir le fichier : <strong>'. $fichier .'</strong>, installation interompue ...</div>'. RETOUR);
+        exit('<div class="alert alert-danger">Unable to open file : <strong>'. $fichier .'</strong>, installation corrupt ...</div>'. RETOUR);
     }
 
     if (fwrite($ouvrir, $texte) == FALSE)
     {
-        exit('<div class="alert alert-danger">Impossible d\'écrire dans le fichier : <strong>'. $fichier .'</strong>, installation interompue ...</div>'. RETOUR);
+        exit('<div class="alert alert-danger">Can not write to the file : <strong>'. $fichier .'</strong>, installation corrupt ...</div>'. RETOUR);
     }
 
-    echo '<div class="alert alert-success">Creation du fichier de configuration effectuee avec success ...</div>';
+    echo '<div class="alert alert-success">Creation of effected configuration file with success ...</div>';
     fclose($ouvrir);
 
     $requetes = '';
     $sql = file('./docs/sql/database.sql');
-    
     foreach($sql as $lecture)
     {
         if (substr(trim($lecture), 0, 2) != '--')
@@ -172,9 +167,7 @@ $lang      = "fr";
             $requetes .= $lecture;
         }
     }
-
     $reqs = split(';', $requetes);
-    
     foreach($reqs as $req)
     {
         if (!mysql_query($req) AND trim($req) != '')
@@ -182,24 +175,40 @@ $lang      = "fr";
             exit('ERREUR : '.$req);
         }
     }
-
-    echo '<div class="alert alert-success">Installation des tables dans la base de donnees effectuee avec success ...</div>';
-    echo '<div class="alert alert-warning">Veuillez supprimer le fichier <strong>install.php</strong> du server ...</div>';
+	
+    $requetes = '';
+    $sql = file('./docs/sql/database_NPC.sql');
+    foreach($sql as $lecture)
+    {
+        if (substr(trim($lecture), 0, 2) != '--')
+        {
+            $requetes .= $lecture;
+        }
+    }
+    $reqs = split(';', $requetes);
+    foreach($reqs as $req)
+    {
+        if (!mysql_query($req) AND trim($req) != '')
+        {
+            exit('ERREUR : '.$req);
+        }
+    }
+    echo '<div class="alert alert-success">Installing the database tables of data effected with success...</div>';
+    echo '<div class="alert alert-warning">Please delete the file <strong>install.php</strong> of server ...</div>';
     echo '<form class="form-group" action="" method="post">';
     echo '<input type="hidden" name="delete" value="1" />';
     echo '<div class="form-group">';
-    echo '<button class="btn btn-danger" type="submit" name="submit" >Effacer le fichier install.php</button>';
+    echo '<button class="btn btn-danger" type="submit" name="submit" >Delete file install.php</button>';
     echo '</div>';
     echo '</form>';
 	
-	$page = file_get_contents("http://opensim.fgagod.fr/Opensim/osmw_install_web.php?domaine=".$domaine ."&date=".date('d/m/Y--h:i:s') );
 }
-// else exit('<a class="btn btn-default" href="index.php">Open Simulator Web Manager</a>');
+
 ?>
 <div class="clearfix"></div>
 
 <footer class="footer">
-    <p>Open Simulator Manager Web Intaller <?php echo date(Y); ?></p>
+    <p><CENTER>Open Simulator Manager Web Intaller <?php echo date(Y); ?></CENTER></p>
 </footer>
 </div>
 

@@ -122,7 +122,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['pas
 
     if ($auth == false)
     {
-        echo '<div class="alert alert-danger alert-anim">Vous ne pouvez pas acceder a cette page</div>';
+        echo '<div class="alert alert-danger alert-anim">'.$osmw_erreur_acces .'</div>';
         header('Location: index.php?erreur=login');
     }
 
@@ -149,7 +149,7 @@ if (isset($_POST['firstname']) && isset($_POST['lastname']) && isset($_POST['pas
 
 <?php if ($themes && isset($_SESSION['authentification'])): ?>
 <!--Themes -->
-<?php if ($_GET['style']) {$theme = $_GET['style'];} else $theme = "Themes"; ?>
+<?php if ($_GET['style']) {$theme = $_GET['style'];} else $theme = "Templates"; ?>
 <div class="btn-group">
     <button type="button" class="btn btn-primary btn-xs dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="glyphicon glyphicon-leaf"></i> <?php echo $theme; ?>
@@ -230,8 +230,8 @@ if (isset($_SESSION['authentification']))
         if ($a == "17") {include('inc/GestSimulateur.php');}    // admin // # Gestion des simulateurs				v5.5 OK
         if ($a == "18") {include('inc/GestConfig.php');}        // admin // # Configuration de OSMW					v5.5 OK	
         // if ($a == "19") {include('inc/xxx.php');}			// #
-        // if ($a == "20") {include('inc/xxx.php');}			// #
-        if ($a == "21") {include('inc/GestHypergrid.php');}     // # Gestion des liens Hypergrid
+        if ($a == "20") {include('inc/GestNPC.php');}			// # Gestion de NPC InWorld							v6.0 OK
+        if ($a == "21") {include('inc/GestHypergrid.php');}     // # Gestion des liens Hypergrid					v5.5 OK	
         if ($a == "22") {include('inc/GestMap.php');}           // # Map											v5.5 OK	
 
         if ($a == "logout")
@@ -275,6 +275,7 @@ if (isset($_SESSION['authentification']))
 			<?php unset($_SESSION['flash']); ?>
 		<?php endif; ?>
 
+		
         <?php
 		// **********
 		// TABS USERS
@@ -282,27 +283,27 @@ if (isset($_SESSION['authentification']))
 		if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		{
 			echo '<ul id="myTab" class="nav nav-pills">';
-			echo '<li class="active"><a href="#user" data-toggle="tab">Section Utilisateur</a></li>';
-			echo '<li ><a href="#admin" data-toggle="tab">Section Administrateur</a></li></ul>';
+			echo '<li class="active"><a href="#user" data-toggle="tab">'.$osmw_section_user.'</a></li>';
+			echo '<li ><a href="#admin" data-toggle="tab">'.$osmw_section_admin.'</a></li></ul>';
 		}
 		
       //  echo '<br />';
         
 		echo '<div class="panel panel-default">
 		          <div class="panel-heading">
-    				  <h3 class="panel-title">Choisir une option ci-dessous:</h3>
+    				  <h3 class="panel-title">'.$osmw_menu_choix.'</h3>
 				  </div>
 				  <div class="panel-body">
 				      <div class="tab-content">';
 		echo '<div class="tab-pane fade in active" id="user">';
-		echo '<p><a class="btn btn-default btn-block" href="?a=1">Etats des Regions</a></p>';
-		echo '<p><a class="btn btn-default btn-block" href="?a=2">Sauvegarder une Region</a></p>';
-		echo '<p><a class="btn btn-default btn-block" href="?a=3">Sauvegarder un Terrain</a></p>';
-        echo '<p><a class="btn btn-default btn-block" href="?a=4">Sauvegarder un Inventaire</a></p>';		
-		echo '<p><a class="btn btn-default btn-block" href="?a=10">Les fichiers de Sauvegardes</a></p>';
-		echo '<p><a class="btn btn-default btn-block" href="?a=7">Gestion du Log</a></p>';		
-        echo '<p><a class="btn btn-default btn-block" href="?a=21">Liens Hypergrid</a></p>';
-        echo '<p><a class="btn btn-default btn-block" href="?a=22">Afficher la Map</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=1">'.$osmw_index_1.'</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=2">'.$osmw_index_2.'</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=3">'.$osmw_index_3.'</a></p>';
+        echo '<p><a class="btn btn-default btn-block" href="?a=4">'.$osmw_index_4.'</a></p>';		
+		echo '<p><a class="btn btn-default btn-block" href="?a=10">'.$osmw_index_10.'</a></p>';
+		echo '<p><a class="btn btn-default btn-block" href="?a=7">'.$osmw_index_7.'</a></p>';		
+        echo '<p><a class="btn btn-default btn-block" href="?a=21">'.$osmw_index_21.'</a></p>';
+        echo '<p><a class="btn btn-default btn-block" href="?a=22">'.$osmw_index_22.'</a></p>';
 		echo '</div>';
         
         // ***********
@@ -311,17 +312,20 @@ if (isset($_SESSION['authentification']))
 		echo '<div class="tab-pane fade in" id="admin">';
 		if ($_SESSION['privilege'] >= 4)
 		{
-			echo '<p><a class="btn btn-default btn-block" href="?a=15">Gestion des Utilisateurs</a>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=17">Gestion des Simulateurs</a></p>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=6">Gestion des Regions</a></p>';
-			echo '<p><a class="btn btn-default btn-block" href="?a=18">Configuration du Manager</a></p>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=5">Configuration des Fichiers INI</a></p>';
+			echo '<p><a class="btn btn-default btn-block" href="?a=15">'.$osmw_index_15.'</a>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=17">'.$osmw_index_17.'</a></p>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=6">'.$osmw_index_6.'</a></p>';
+			echo '<p><a class="btn btn-default btn-block" href="?a=18">'.$osmw_index_18.'</a></p>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=5">'.$osmw_index_5.'</a></p>';
+
+			echo '<p><a class="btn btn-default btn-block" href="?a=20">'.$osmw_index_20.'</a></p>';
+		
 		}
 		elseif ($_SESSION['privilege'] >= 3)
 		{
-			echo '<p><a class="btn btn-default btn-block" href="?a=15">Gestion des Utilisateurs</a>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=17">Gestion des Simulateurs</a></p>';
-		    echo '<p><a class="btn btn-default btn-block" href="?a=6">Gestion des Regions</a></p>';
+			echo '<p><a class="btn btn-default btn-block" href="?a=15">'.$osmw_index_15.'</a>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=17">'.$osmw_index_17.'</a></p>';
+		    echo '<p><a class="btn btn-default btn-block" href="?a=6">'.$osmw_index_6.'</a></p>';
 		}
 
 		
@@ -346,7 +350,7 @@ else
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            Echec d'authentification: <strong>login ou mot de passe incorrect ...</strong>
+            <strong>Echec d'authentification: login ou mot de passe incorrect ...</strong>
         </div>
     <?php endif; ?>
 
@@ -365,7 +369,7 @@ else
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
-            Echec d'authentification: Aucune session ouverte ou droits insuffisants pour afficher cette page ...</strong>
+            Echec d'authentification:<br> Aucune session ouverte ou droits insuffisants pour afficher cette page ...</strong>
         </div>
         <div class="alert alert-success alert-dismissible" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -375,7 +379,7 @@ else
         </div>
     <?php endif; ?>
 
-    <img style="height:128px;" class="img-thumbnail img-circle center-block" alt="Logo Server" src="img/logo.png">
+    <img style="height:256px;" class="img-thumbnail img-circle center-block" alt="Logo Server" src="img/logo.png">
     <!--<h2 class="form-signin-heading text-center"></h2>-->
     <br />
     <label for="firstname" class="sr-only">Firstname</label>
@@ -484,7 +488,7 @@ else
 <?php
 // ********************************************************************************************************************************************
 // si le fichier n'existe  pas 
-        exit('<div class="alert alert-danger">!!! Fichier de configuration inexistant, <a href="install.php">Lancer l\'installation. </a> !!! </div>'. RETOUR);
+        exit('<div class="alert alert-danger">!!! configuration file not exist, <a href="install.php"> Installation </a> !!! </div>'. RETOUR);
 echo '</body>
 </html>';		
 }

@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Gestion des fichiers de Configuration</h1>';
+    echo '<h1>'.$osmw_index_5.'</h1>';
     echo '<div class="clearfix"></div>';
     //******************************************************
     //  Affichage page principale
@@ -43,7 +43,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
     else if (!$_POST['affichage']) 
     {
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>OpenSim.ini</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>OpenSim.ini</strong> '.$osmw_erreur_file_exist.'</div>';
     }
 
     if (file_exists($filename2))
@@ -54,7 +54,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 	else if (!$_POST['affichage'])
 	{
         // echo "Fichier OpenSimDefaults.ini innexistant ...";
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>".$FichierINIOpensim."</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>".$FichierINIOpensim."</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename3))
@@ -64,7 +64,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>FlotsamCache.ini</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>FlotsamCache.ini</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 
@@ -75,7 +75,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>GridCommon.ini</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>GridCommon.ini</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename5))
@@ -85,7 +85,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>OpenSim.log</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>OpenSim.log</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename6))
@@ -95,7 +95,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>OpenSim.32BitLaunch.log</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>OpenSim.32BitLaunch.log</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename7))
@@ -105,7 +105,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>startuplogo.txt</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>startuplogo.txt</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename8))
@@ -115,7 +115,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>startup_commands.txt</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>startup_commands.txt</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
 	if (file_exists($filename9))
@@ -125,10 +125,10 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
 
 	else if (!$_POST['affichage'])
 	{
-        echo '<div class="alert alert-danger alert-anim" role="alert">Fichier <strong>shutdown_commands.txt</strong> innexistant ...</div>';
+        echo '<div class="alert alert-danger alert-anim" role="alert"> <strong>shutdown_commands.txt</strong> '.$osmw_erreur_file_exist.'</div>';
 	}
 
-    echo '<h4>Choisir le fichier a modifier</h4>';
+    echo '<h4>'.$osmw_menu_choix_change.'</h4>';
     echo '<form class="form-group" method="post" action="">';
     echo $dispo;
     echo '</form>';
@@ -151,13 +151,13 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
         fwrite($ouverture, "$_POST[modif]");
         fclose($ouverture);
         echo '<div class="alert alert-success alert-anim" role="alert">';
-        echo 'Modification du fichier <strong>'.$_POST['affichage'].'</strong> effectue avec succes ...</div>';
+        echo '<strong>'.$_POST['affichage'].'</strong> '.$osmw_edit_user_ok.'</div>';
     }
         
     if (isset($_POST['affichage']))	// Affiche le fichier
     {  	
         echo '<div class="alert alert-warning" role="alert">';
-        echo '<p>Modification du fichier <strong>'.$_POST['affichage'].'</strong> sur le Simulateur <strong>'.$_SESSION['opensim_select'].' '.INI_Conf_Moteur($_SESSION['opensim_select'],"version").'</strong>';
+        echo '<p>'.$osmw_file_change.' :<strong>'.$_POST['affichage'].'</strong>';
         echo '</div>';
 
         echo '<form class="form-group" method="post" action="">';
@@ -170,7 +170,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 4)
         echo '<p></p>';
 
         echo '<button class="btn btn-success" type="submit" name="button" '.$btnN3.'>';
-        echo '<i class="glyphicon glyphicon-ok"></i> Modifier le Fichier</button>';
+        echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_modifier.'</button>';
         echo '</form>';
     }
 }

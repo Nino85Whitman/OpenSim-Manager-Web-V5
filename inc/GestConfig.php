@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
      //SECURITE MOTEUR
     /* ************************************ */
 	
-   echo '<h1>Configuration du Manager</h1>';   
+   echo '<h1>'.$osmw_index_18.'</h1>'; 
     echo '<div class="clearfix"></div>';   
 	
     $db = mysql_connect($hostnameBDD, $userBDD, $passBDD);
@@ -43,7 +43,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             $reqIns = mysql_query($sqlIns) or die('Erreur SQL !<p>'.$sqlIns.'</p>'.mysql_error());
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Configuration <strong>".$_POST['NewName']."</strong> sauvee avec succes</p>";
+            echo " Configuration <strong>".$_POST['NewName']."</strong> ".$osmw_save_user_ok."</p>";
         }
     }
     // ******************************************************
@@ -57,29 +57,29 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		echo '<form class="form-group" method="post" action="">';
 		echo '<table class="table table-hover">';
 		echo '<tr>';
-		echo '<td>Chemin du Manager (ex: /manager/):</td>';
+		echo '<td>Path (ex: /manager/):</td>';
 		echo '<td><input class="form-control" type="text" value="'.$data['cheminAppli'].'" name="cheminAppli" '.$btnN3.'></td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>Email Administrateur:</td>';
+		echo '<td>Email:</td>';
 		echo '<td><input class="form-control" type="text" value="'.$data['destinataire'].'" name="destinataire" '.$btnN3.'></td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>Autorisation d\'Ajout de region (0=Non 1=Oui) :</td>';
+		echo '<td>'.$osmw_label_add_sim_check.':</td>';
 		echo '<td><input class="form-control" type="text" value="'.$data['Autorized'].'" name="Autorized" '.$btnN3.'></td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>Autorisation Nombre Maximum de region:</td>';
+		echo '<td>'.$osmw_label_nb_max_sim.':</td>';
 		echo '<td><input class="form-control" type="text" value="'.$data['NbAutorized'].'" name="NbAutorized" '.$btnN3.'></td>';
 		echo '</tr>';
 		echo '<tr>';
-		echo '<td>Version du Manager:</td>';
+		echo '<td>Copyright:</td>';
 		echo' <td><input class="form-control" type="text" value="'.$data['VersionOSMW'].'" name="VersionOSMW" '.$btnN3.'></td>';
 		echo '</tr>';
 		echo '</form>';
 		echo '</table>';
         echo' <button type="submit" class="btn btn-success" name="cmd" value="Enregistrer" '.$btnN3.'>';
-        echo '<i class="glyphicon glyphicon-ok"></i> Enregistrer</button>';
+        echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_enregistrer.'</button>';
 	}
 }
 else {header('Location: index.php');}

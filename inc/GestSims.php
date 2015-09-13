@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 	
-    echo '<h1>Etats des Regions</h1>';
+    echo '<h1>'.$osmw_index_1.'</h1>';
     echo '<div class="clearfix"></div>';
 	
     //******************************************************
@@ -160,9 +160,9 @@ if (isset($_SESSION['authentification']))
     echo '<form class="form-group" method="post" action="">';
     echo '<div class="btn-group " role="group" aria-label="...">';
 	echo '<div class="input-group col-xs-50">';
-	echo '<input type="text" class="form-control" name="msg_alert" placeholder="Message a toutes les regions connectees ...">';
+	echo '<input type="text" class="form-control" name="msg_alert" placeholder="'.$osmw_label_msg_send.'">';
 	echo '<span class="input-group-btn">';
-    echo '<button type="submit" class="btn btn-danger" value="Alerte General" name="cmd" '.$btnN2.'><i class="glyphicon glyphicon-bullhorn"></i> Alerte General</button>';
+    echo '<button type="submit" class="btn btn-danger" value="Alerte General" name="cmd" '.$btnN2.'><i class="glyphicon glyphicon-bullhorn"></i> '.$osmw_btn_msg_send.'</button>';
     echo '</span>';
     echo '</div>';
     echo '</div>';

@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 		
-    echo '<h1>Gestion des Terrains</h1>';
+    echo '<h1>'.$osmw_index_3.'</h1>';
     echo '<div class="clearfix"></div>';	
     //******************************************************
     //* Selon ACTION bouton => Envoi Commande via Remote Admin 
@@ -54,7 +54,7 @@ if (isset($_SESSION['authentification']))
 			}	
 			
 		echo '<div class="alert alert-success alert-anim" role="alert">';
-		echo '<strong><center>Fichier en cours de creation, veuillez consulter le <strong>Log</strong> ... <br> <br></center></strong>';
+		echo '<strong><center>'.$osmw_label_consult_log.' ... <br> <br></center></strong>';
 		echo '	<div class="progress"><div class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 45%"><span class="sr-only">85% Complete</span></div></div>';
 		echo '</div>';
 		}
@@ -71,7 +71,7 @@ if (isset($_SESSION['authentification']))
 	if (file_exists($filename2)) {$filename = $filename2 ;}
 
 	$tableauIni = parse_ini_file($filename, true);
-	if ($tableauIni == FALSE){echo '<p class="alert alert-danger">Proleme de lecture du fichier .ini <strong>$filename</strong></p>';}
+	if ($tableauIni == FALSE) {echo '<p>Error: Reading ini file '.$filename.'</p>';}
 	
     // *** Lecture Fichier Regions.ini ***
  	$filename2 = INI_Conf_Moteur($_SESSION['opensim_select'], "address")."Regions/".$FichierINIRegions;	 

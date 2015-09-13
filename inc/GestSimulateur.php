@@ -17,13 +17,13 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Gestion des Simulateurs</h1>';
+    echo '<h1>'.$osmw_index_17.'</h1>';
     echo '<div class="clearfix"></div>';	
 	
 
  	echo '<form class="form-group" method="post" action="">';
     echo '<input type="hidden" name="cmd" value="Ajouter" '.$btnN3.'>';
-	echo '<button class="btn btn-success" type="submit" value="Ajouter un Simulateur" '.$btnN3.'><i class="glyphicon glyphicon-ok"></i> Ajouter un Simulateur</button>';
+	echo '<button class="btn btn-success" type="submit" value="Ajouter un Simulateur" '.$btnN3.'><i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_ajout_simu.'</button>';
 	echo '</form>';
  
 	//******************************************************
@@ -65,7 +65,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Simulateur <strong>".$_POST['NewName']."</strong> ajoute avec succes</p>";
+            echo " ".$osmw_simu." <strong>".$_POST['NewName']."</strong> ".$osmw_save_user_ok."</p>";
 		} 
         
 		if($_POST['cmd'] == 'Update')
@@ -84,7 +84,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
             $reqIns = mysql_query($sqlIns) or die('Erreur SQL !<p>'.$sqlIns.'</p>'.mysql_error());
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Simulateur <strong>".$_POST['NewName']."</strong> mis a jour avec succes</p>";
+            echo " ".$osmw_simu." <strong>".$_POST['NewName']."</strong> ".$osmw_edit_user_ok."</p>";
 		}
 
 		if($_POST['cmd'] == 'Supprimer')
@@ -93,7 +93,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 			$reqIns = mysql_query($sqlIns) or die('Erreur SQL !<p>'.$sqlIns.'</p>'.mysql_error());
 			echo "<p class='alert alert-success alert-anim'>";
             echo "<i class='glyphicon glyphicon-ok'></i>";
-            echo " Simulateur <strong>".$_POST['NewName']."</strong> supprime avec succes</p>";
+            echo " ".$osmw_simu." <strong>".$_POST['NewName']."</strong> ".$osmw_delete_user_ok."</p>";
 		}
     }
 
@@ -101,9 +101,7 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
     //  Affichage page principale
     //******************************************************
 
-    
-    // echo '<h4>Liste des Simulateurs ajoutes au Manager</h4>';
-    echo '<p>Nombre total de Simulateurs <span class="badge">'.NbOpensim().'</span></p>';
+    echo '<p>'.$osmw_label_totl_simulator.' <span class="badge">'.NbOpensim().'</span></p>';
 	echo '<table class="table table-hover">';
 	echo '<tr>';
 	echo '<th>Name</th>';
@@ -132,8 +130,8 @@ if (isset($_SESSION['authentification']) && $_SESSION['privilege']>= 3)
 		echo '<td><input class="form-control" type="text" name="address" value="'.$data['address'].'" '.$btnN3.'></td>';
 		echo '<td><input class="form-control" type="text" name="hypergrid" value="'.$data['hypergrid'].'" '.$btnN3.'></td>';
 		echo '<td><input class="form-control" type="text" name="DB_OS" value="'.$data['DB_OS'].'" '.$btnN3.'></td>';
-        echo '<td><button class="btn btn-success" type="submit" name="cmd" value="Update" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> Update</button></td>';
-        echo '<td><button class="btn btn-danger" type="submit" name="cmd" value="Supprimer" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> Supprimer</button></td>';
+        echo '<td><button class="btn btn-success" type="submit" name="cmd" value="Update" '.$btnN3.'><i class="glyphicon glyphicon-edit"></i> '.$osmw_btn_modifier.'</button></td>';
+        echo '<td><button class="btn btn-danger" type="submit" name="cmd" value="Supprimer" '.$btnN3.'><i class="glyphicon glyphicon-trash"></i> '.$osmw_btn_supprimer.'</button></td>';
 		echo '</tr>';
 		echo '</form>';
 		echo '</tr>';

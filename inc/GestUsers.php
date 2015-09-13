@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 
-    echo '<h1>Gestion de son compte utilisateur</h1>';
+    echo '<h1>'.$osmw_index_8.'</h1>';
     echo '<div class="clearfix"></div>';
 	    //******************************************************
     //  Affichage page principale
@@ -95,7 +95,7 @@ if (isset($_SESSION['authentification']))
 		echo '</form>';
 		echo '</table>';
         echo' <button type="submit" class="btn btn-success" name="cmd" value="Enregistrer" '.$btnN3.'>';
-        echo '<i class="glyphicon glyphicon-ok"></i> Enregistrer</button>';
+        echo '<i class="glyphicon glyphicon-ok"></i> '.$osmw_btn_enregistrer.'</button>';
 	
 
 }

@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
 		
-    echo '<h1>Gestion des Regions</h1>';
+    echo '<h1>'.$osmw_index_10.'</h1>';
     echo '<div class="clearfix"></div>';
 	
 	/* Actions des Boutons */

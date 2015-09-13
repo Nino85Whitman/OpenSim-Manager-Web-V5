@@ -8,8 +8,8 @@ More config
 
 Admin Login
 ===========
-firstname = super
-lastname  = admin
+firstname = Super
+lastname  = Admin
 password  = password
 
 For Linux

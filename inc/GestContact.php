@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
     
-    echo '<h1>Formulaire de Contact</h1>';
+    echo '<h1>'.$osmw_index_9.'</h1>';
     echo '<div class="clearfix"></div>';
     
 	
@@ -82,7 +82,7 @@ if (isset($_SESSION['authentification']))
 	{	
 		// afficher le formulaire
 		echo "\n".'<form class="form-group" id="contact" method="post" action="'.$form_action.'">'."\n";
-		echo '  <h4>Vos coordonnees</h4>'."\n";
+		echo '  <h4>'.$osmw_label_conatct_coord.'</h4>'."\n";
 		echo '      <div class="form-group">'."\n";
 		echo '          <label for="nom">Nom:</label>'."\n";
 		echo '          <input class="form-control" type="text" id="nom" name="nom" value="'.stripslashes($nom).'" tabindex="1" />'."\n";
@@ -91,8 +91,7 @@ if (isset($_SESSION['authentification']))
 		echo '          <label for="email">Email:</label>'."\n";
 		echo '          <input class="form-control" type="text" id="email" name="email" value="'.stripslashes($email).'" tabindex="2" />'."\n";
 		echo '      </div>'."\n";
-
-		echo '  <h4>Votre message</h4>'."\n";
+		echo '  <h4>'.$osmw_label_conatct_msg.'</h4>'."\n";
 		echo '      <div class="form-group">'."\n";
 		echo '          <label for="objet">Sujet:</label>'."\n";
 		echo '          <input class="form-control" type="text" id="objet" name="objet" value="'.stripslashes($objet).'" tabindex="3" />'."\n";
@@ -105,7 +104,7 @@ if (isset($_SESSION['authentification']))
         echo '          <label><input type="checkbox" name="sendcopy" value="true" id="Remember"> Send me a copy of this mail</label>'."\n";
         echo '      </div>'."\n";
 
-		echo '  <button class="btn btn-success" type="submit" name="envoi" value="Envoyer"><i class="glyphicon glyphicon-envelope"></i> Envoyer le message</button>'."\n";
+		echo '  <button class="btn btn-success" type="submit" name="envoi" value="Envoyer"><i class="glyphicon glyphicon-envelope"></i> '.$osmw_btn_msg_send.'</button>'."\n";
 		echo '</form>'."\n";
 	}
 }

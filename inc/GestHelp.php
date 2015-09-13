@@ -17,7 +17,7 @@ if (isset($_SESSION['authentification']))
      //SECURITE MOTEUR
     /* ************************************ */
     
-    echo '<h1>Aide</h1>';
+    echo '<h1>'.$osmw_index_13.'</h1>';
     echo '<div class="clearfix"></div>';
     
 
