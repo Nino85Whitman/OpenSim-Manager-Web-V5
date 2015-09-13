@@ -26,19 +26,27 @@ if (isset($_SESSION['authentification']))
 	echo '</div>';
 
 	echo '<div class="panel-body">';
-	echo "<p>L'objectif de ce projet est de permettre la gestion de Simulateurs <strong>OpenSim</strong> installés sur un serveur <strong>Windows</strong></p>";
+	echo "<p>L'objectif de ce projet est de permettre la gestion de Simulateurs <strong>OpenSim</strong> installés sur un serveur Windows / Linux</p>";
     echo "<p>Merci a tous les Contributeurs et Utilisateurs pour ce produit Open Source</p>";
+	echo '<hr>';
+	echo "<p>The objective of this project is to enable management <strong>OpenSimulator</strong> installed on a Windows / Linux server</strong></p>";
+    echo "<p>Thank you to all the Contributors and Users for this Open Source</p>";		
 	echo '</div>';
 
     echo '<div class="panel-footer">';
-    echo 'Projet initialement développé par <a href="index.php?a=9">Nino85 Whitman</a> en 2010';
+    echo 'Projet initialement développé en 2010 par Nino85 Whitman';
     echo ' et entièrement refactorisé par <a href="index.php?a=9">djphil</a> en 2015';
+	echo ' puis repris en développement par <a href="index.php?a=9">Nino85 Whitman</a>';
+	echo '<hr>';
+    echo 'Project initially developed in 2010 by Nino85 Whitman';
+    echo ' and completely refactored by <a href="index.php?a=9">djphil</a> en 2015';
+	echo ' then taken by developing <a href="index.php?a=9">Nino85 Whitman</a>';
     echo '</div>';
-	echo '</div>';
-
+	echo '</div>';	
+	
 	echo '<div class="panel panel-warning">';
 	echo '<div class="panel-heading">';
-	echo '<h3 class="panel-title"><i class="glyphicon glyphicon-piggy-bank"></i> Pour aider au developpement de OpenSim Web Manager</h3>';
+	echo '<h3 class="panel-title"><i class="glyphicon glyphicon-piggy-bank"></i> Pour aider au developpement de OpenSim Web Manager / To help the development of OpenSim Web Manager</h3>';
 	echo '</div>';
 	echo '<div class="panel-body">';
     include_once "./inc/paypal.php";
